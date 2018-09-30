@@ -203,7 +203,7 @@ export class Calendar {
                 let record = this.getEventRecord(year,0,i + 1);
                 if (month === 11) {
                     this.dateArray.push({
-                        year: year,
+                        year: year + 1,
                         month: 0,
                         date: i + 1,
                         isThisMonth: false,
@@ -273,15 +273,18 @@ export class Calendar {
         this.createMonth(this.displayYear, this.displayMonth);
     }
 
-    // Select a day, click event
+    // Select a day, click event    
     daySelect(day, i, j) {
         // First clear the last click status
-        this.dateArray[this.lastSelect].isSelect = false;
-        // Store this clicked status
-        this.lastSelect = i * 7 + j;
-        this.dateArray[i * 7 + j].isSelect = true;
+        console.log("XXXX", day, i, j);
+        if (this.dateArray[this.lastSelect]) {
+            this.dateArray[this.lastSelect].isSelect = false;
+            // Store this clicked status
+            this.lastSelect = i * 7 + j;
+            this.dateArray[i * 7 + j].isSelect = true;
 
-        this.onDaySelect.emit(day);
+            this.onDaySelect.emit(day);            
+        }
     }
 }
 
